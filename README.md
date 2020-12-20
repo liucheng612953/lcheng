@@ -14,7 +14,79 @@
 8. git status 查看本地 git 的当前状态（例如：未提交，或者修改过）
 9. git add -A 将所有修改提交到暂存区
 
-10. vue 创建新项目：vue create \*\*\*
+10. vue 创建新项目：vue create \*\*\* 在 java 文件夹下 Shift+右键开启命令窗口，
+    Manually select features ，Babel，In package.json ，n，
+    创建好后进入 cd \*\*\*创建的项目名字，npm run serve,运行项目
+11. cnpm i 下载依赖
+12. vue 创建 router 新项目：vue create \*\*\* 在 java 文件夹下 Shift+右键开启命令窗口，
+    Manually select features ，Babel/router，In package.json ，n，
+    创建好后进入 cd \*\*\*创建的项目名字，npm run serve,运行项目
+
+# 2020.12.20(下午：vue)
+
+1. vue 语法缩写：v-bind:style="";缩写成:style=""
+2. v-on:click=""; 缩写成 @click="";
+3. 用 style 动态改变 height 的高度，动态使用数组中的数据，'background-color':'#f40'改变颜色
+
+```
+:style="{'height':i.gao+'px','background-color':'#f40'}"
+```
+
+4. :key="i.index" key 值是取数组中的唯一索引
+5. 微信表情点击，常用列表首位显示
+
+```
+<span  v-for="(i , index) in array" :key="index" >-{{i}}-</span>
+<button @click="dian(i)" v-for="(i,index) in arr" :key="index">{{i}}</button>
+ dian(e){
+        this.array=this.array.filter((i)=>{//filter过滤数组，return参数是否一致，重新给this.array数组赋值实现功能
+          return !(e==i)
+        })
+        this.array.unshift(e)//将参数e对应的点击表情添加给常用表情列表数组
+      }
+```
+
+6. vue 路由的用法，用 js 方式写，编程式导航
+
+```
+<div @click="gotoPach('/TiaoZhuan/Child1')">Child1</div>
+    <div @click="gotoPach('/TiaoZhuan/Child2')">Child2</div>
+    <router-view/>
+gotoPach(str){
+        this.$router.push(str)//去往上一个页面
+        this.$router.replace(str)//去往栈里面的第一个页面
+        this.$router.go(-1)//去往上一个页面,也可以是-2，-3
+    }
+```
+
+路由传参：
+gotoPach(str){//参数存入 router 中
+const userId = "123"
+this.$router.push({name : str , params: {userId}});
+        // this.$router.push(str)
+}
+canshu(){
+console.log(this.\$route.params.userId)//获取用 route
+}
+
+7. import 和 export 分别是上面意思：import 是引入，export 是输出
+8. <router-link></router-link>和<router-view/>分别代表，获取引入得方式，显示电视机
+
+# 2020.12.20(上午：vue)
+
+this 的调用
+这里的()=>是 function(){}在 vue 中的写法，如果不换成尖括号写法，this 不能正常调用
+也可以在 setInterval 上面 let that=this，用 that 打点属性
+
+```
+kaish(){//随即开始
+      this.begins =setInterval(()=> {
+        //console.log(this.arrays)
+        this.shs=Math.floor(Math.random()*this.arrays.length)
+        this.xianshis=this.arrays[this.shs]
+      },500)
+     },
+```
 
 # 2020.12.13(下午：Vue)
 

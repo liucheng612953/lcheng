@@ -37,7 +37,7 @@
       {{arr[sji]=Math.floor(Math.random()*arr.length+1)}}
     </div> -->
     <!-- 随机点名 -->
-      <div class="system" v-bind:title="message">
+      <!-- <div class="system" v-bind:title="message">
         {{message}}
       <div class="system-top">
         <input type="text" v-model="inp" >
@@ -48,7 +48,29 @@
       <button v-on:click="jiesh">结束随机点名</button>
       </div>
       <div v-bind:class="{xianshi:xianshis}">{{xianshis}}</div>
-      <!-- <div>{{shuzu}}</div> -->
+    </div> -->
+    <!-- 朋友圈 -->
+    <div class="pengyouquan">
+      <div class="pengyouquan-top">
+        <div class="pengyouquan-top-one">
+          <div class="pengyouquan-top-one-one"></div>
+          <div class="pengyouquan-top-one-two">
+            <span v-on:click="xiangji">相机</span>
+          </div>
+        </div>
+        <div class="pengyouquan-top-one-three">liucheng</div>
+        <div class="pengyouquan-top-one-foru"></div>
+      </div>
+      <div class="neirong" v-for="(ietm,index) in array" :key="index">
+        <div>{{ietm.id}}</div>
+        <div>{{ietm.title}}</div>
+        <div>{{ietm.cont}}</div>
+      </div>
+    </div>
+    <!-- 发表 -->
+    <div v-bind:class="{fabiao:fab}" v-if="fab!=true" >
+      <button v-on:click="dianj">发表</button>
+      <input type="text" v-model="shuru" >
     </div>
   </div> 
 </template>
@@ -63,6 +85,7 @@ export default {
       arrays:["啦啦","哈哈","嘿嘿","呵呵","嘎嘎","哇哇","呜呜"],
       ope:"+",
       sub:0,
+      cont:"",
       inp:"啊啊",
       luru:true,
       kaishi: true,
@@ -70,6 +93,8 @@ export default {
       begins:true,
       sui:true,
       shs:"",
+      shuru:"",
+      fab:true,
       isActive : true,
       xianshis:"",
       messages:{
@@ -139,6 +164,18 @@ export default {
      },
      jiesh(){//随机结束
           clearInterval(this.begins)
+     },
+     xiangji(){//点击相机进入发表页面
+      this.fab=false;
+     },
+     dianj(){
+       let tianj={
+         id:1,
+         title:this.shuru,
+         cont:"1000"
+       }
+      this.array.unshift(tianj)
+      console.log(this.array)
      }
   }
   
@@ -154,6 +191,66 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.pengyouquan{
+  width: 400px;
+  height: 500px;
+  background: cornflowerblue;
+
+}
+.pengyouquan-top{
+width: 400px;
+height: 200px;
+background: cyan;
+}
+.pengyouquan-top-one{
+width: 400px;
+height: 50px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+.pengyouquan-top-one-one{
+  width: 30px;
+  height: 30px;
+  background: chartreuse;
+}
+.pengyouquan-top-one-two{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+.pengyouquan-top-one-three{
+  color: #f5f5f5;
+  margin: 130px 0px 0px 160px;
+
+}
+.pengyouquan-top-one-foru{
+  width: 60px;
+  height: 60px;
+  background: chocolate;
+  margin: -40px 0px 0px 320px;
+  border-radius: 10px;
+}
+.neirong{
+  width: 400px;
+  height: 200px;
+  margin-top: 30px;
+  background: cornsilk;
+}
+.fabiao{
+  width: 400px;
+  height: 200px;
+  background: rgb(240, 159, 38);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 .active{
   background: rgb(218, 227, 245);
