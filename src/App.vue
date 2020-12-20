@@ -19,13 +19,38 @@
     <div v-if="ope=='-'">计算结果{{message-sub}}</div>
     <div v-if="ope=='*'">计算结果{{message*sub}}</div>
     <div v-if="ope=='/'">计算结果{{message/sub}}</div> -->
-
-  <div v-for="itme in array " :key="itme.index">
-        <div v-bind:class="[{btn:index==1,btn2:index==2,btn3:index==3},btn4]">{{itme.id}}</div>
+  <!-- 新闻列表 -->
+  <!-- <div v-bind:class="{ active : isActive }" v-for="(itme,index) in array" :key="index">
+        <div v-bind:class="[{btn:index==0,btn2:index==1,btn3:index==2,btn4:index==3}]">{{itme.id}}</div>
         <div>{{itme.title}}</div>
-        <div>{{itme.number}}</div>
-        </div>
-  </div>
+        <div>{{itme.cont}}</div>
+  </div> -->
+   <!-- <div class="item" v-for="item in news" :key="item.index">
+      <div
+        v-bind:class="[item.index==1?'cls1':item.index==2?'cls2':item.index==3?'cls3':'cls']"
+      >{{item.index}}</div>
+      <div>{{item.title}}</div>
+      <div>{{item.count}}万</div>
+    </div>-->
+    <!-- 随机数 -->
+    <!-- <div v-for="sui in arr" :key="sui.index">
+      {{arr[sji]=Math.floor(Math.random()*arr.length+1)}}
+    </div> -->
+    <!-- 随机点名 -->
+      <div class="system" v-bind:title="message">
+        {{message}}
+      <div class="system-top">
+        <input type="text" v-model="inp" >
+        <button v-on:click="entering">录入</button>
+      </div>
+      <div class="dianming">
+      <button v-on:click="kaish">开始随机点名</button>
+      <button v-on:click="jiesh">结束随机点名</button>
+      </div>
+      <div v-bind:class="{xianshi:xianshis}">{{xianshis}}</div>
+      <!-- <div>{{shuzu}}</div> -->
+    </div>
+  </div> 
 </template>
 
 <script>
@@ -33,43 +58,90 @@ export default {
   name: 'App',
   data:()=> {//函数data这样写就变成了属性名
     return {
-      message:0,
+      message:"随机点名系统",
       arr:[1,2,3,4,5],
+      arrays:["啦啦","哈哈","嘿嘿","呵呵","嘎嘎","哇哇","呜呜"],
       ope:"+",
       sub:0,
+      inp:"啊啊",
+      luru:true,
+      kaishi: true,
+      jieshu: true,
+      begins:true,
+      sui:true,
+      shs:"",
+      isActive : true,
+      xianshis:"",
       messages:{
         name:"我是messages对象的属性"
-      }
-    }
-  },
-  methods: {
-    test(){
-      console.log("我是点击对象")
-      
-    }
-  },
-  array:[
+      },
+      array:[
         {
             id:1,
             title:"这个国家",
-            number:"400万"
+            cont:"400万"
     },
      {
             id:2,
             title:"那个国家",
-            number:"300万"
+            cont:"300万"
     },
      {
             id:3,
             title:"个国家",
-            number:"200万"
+            cont:"200万"
     },
      {
             id:4,
             title:"国家",
-            number:"100万"
+            cont:"100万"
+    }
+    ],
+    news: [
+        {
+          index: 1,
+          title: "31省",
+          count: 477
+        },
+        {
+          index: 2,
+          title: "嫦娥5号",
+          count: 477
+        },
+        {
+          index: 3,
+          title: "黑龙江",
+          count: 477
+        },
+        {
+          index: 4,
+          title: "夙愿案",
+          count: 477
+        }
+      ]
+    }
+  },
+  
+  methods: {
+    test(){
+      console.log("我是点击对象")
+      
     },
-    ]
+    entering() {//姓名录入
+      this.arrays.unshift(this.inp);
+    },
+     kaish(){//随即开始
+      this.begins =setInterval(()=> {
+        //console.log(this.arrays)
+        this.shs=Math.floor(Math.random()*this.arrays.length)
+        this.xianshis=this.arrays[this.shs]
+      },500)
+     },
+     jiesh(){//随机结束
+          clearInterval(this.begins)
+     }
+  }
+  
   
 }
 </script>
@@ -83,6 +155,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.active{
+  background: rgb(218, 227, 245);
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
  .btn{
         color: rgb(241, 7, 7);
     }
@@ -95,4 +175,59 @@ export default {
     .btn4{
         color: rgb(10, 10, 10);
     }
+.item {
+  width: 400px;
+  height: auto;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.cls {
+  color: #2c3e50;
+}
+.cls1 {
+  color: aquamarine;
+}
+.cls2 {
+  color: blue;
+}
+.cls3 {
+  color: bisque;
+}
+.system{
+  width: 300px;
+  height: 400px;
+  border: cornflowerblue 1px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.system-top{
+  width: 300px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dianming{
+   width: 300px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.xianshi{
+  width: 150px;
+  height: 100px;
+  border: cornflowerblue 1px solid;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 </style>

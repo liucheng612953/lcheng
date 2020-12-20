@@ -14,6 +14,8 @@
 8. git status 查看本地 git 的当前状态（例如：未提交，或者修改过）
 9. git add -A 将所有修改提交到暂存区
 
+10. vue 创建新项目：vue create \*\*\*
+
 # 2020.12.13(下午：Vue)
 
 vue 在 git 上创建新项目：
@@ -31,6 +33,23 @@ vue 在 git 上创建新项目：
 10. 创建 vue 项目命令：vue create 项目名
 11. 运行 vue:npm run serve
 12. v-bind 鼠标悬停几秒钟查看此处动态绑定的提示信息！
+
+```
+<div v-bind:class="[index == 1?cls1:index==2?cls2:index==3?cls3:'',cls]" v-on:click="test">点我</div>
+ <div class="item" v-for="item in news" :key="item.index">
+      <div
+        v-bind:class="[item.index==1?'cls1':item.index==2?'cls2':item.index==3?'cls3':'cls']"
+      >{{item.index}}</div>
+      <div>{{item.title}}</div>
+      <div>{{item.count}}万</div>
+    </div>
+    <div class=" active " v-for="active in array" :key="active.id">
+        <div v-bind:class="[active.index==1?'btn':active.index==2?'btn2':active.index==3?'btn3':'btn4']">{{active.id}}</div>
+        <div>{{active.title}}</div>
+        <div>{{active.cont}}</div>
+  </div>
+```
+
 13. v-if v-else if 判断
 14. v-for"(itme in arr)" :key="itme.index" for 循环，必须加 key
 15. v-on:click onclick 事件
